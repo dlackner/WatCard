@@ -293,7 +293,35 @@ function rateTier(multiplier) {
 }
 
 function getCategoryIcon(category) {
-  return `<span class="cat-dot"></span>`;
+  const icons = {
+    "Dining": "🍽️",
+    "Groceries": "🛒",
+    "Gas": "⛽",
+    "Travel": "✈️",
+    "Flights": "✈️",
+    "Hotels": "🏨",
+    "Streaming": "📺",
+    "Transit": "🚇",
+    "Online Shopping": "🛍️",
+    "Amazon": "📦",
+    "Drug Stores": "💊",
+    "Home Improvement": "🏠",
+    "Entertainment": "🎬",
+    "EV Charging": "🔌",
+    "Select Streaming": "📺",
+    "Apple Purchases": "🍎",
+    "Costco": "🏪",
+    "JetBlue Purchases": "✈️",
+    "Wholesale Clubs": "🏪",
+    "Rotating Quarterly Category": "🔄",
+    "Top Eligible Category": "⭐",
+    "Your Choice Category 1": "⭐",
+    "Your Choice Category 2": "⭐",
+    "Your Choice Category": "⭐",
+  };
+  const key = Object.keys(icons).find(k => category.toLowerCase().includes(k.toLowerCase()));
+  const icon = key ? icons[key] : "·";
+  return `<span class="cat-icon">${icon}</span>`;
 }
 
 // Plain text version for export
@@ -385,83 +413,40 @@ function renderResults(data) {
 
 // ── Export Report ────────────────────────────────────────
 function generateReport(data) {
-  const w = 48;
-  const line = "=".repeat(w);
-  const dash = "-".repeat(w);
   const lines = [];
 
-  lines.push(line);
-  lines.push(center("WAT CARD!", w));
-  lines.push(center("SPENDING REPORT", w));
-  lines.push(line);
+  lines.push("Wat Card");
+  lines.push(`${data.cards.length} card${data.cards.length > 1 ? "s" : ""}: ${data.cards.join(", ")}`);
   lines.push("");
-  lines.push(`  CARDS IN WALLET: ${data.cards.length}`);
-  for (const card of data.cards) {
-    lines.push(`    > ${card}`);
-  }
-  lines.push("");
-  lines.push(dash);
-  lines.push(center("TOP PICKS", w));
-  lines.push(dash);
-
-  const topRecs = data.recommendations.slice(0, 3);
-  for (const rec of topRecs) {
-    lines.push(`  ${getCategoryCode(rec.category)} ${rec.category}`);
-    lines.push(`       USE: ${rec.cardName}`);
-    lines.push(`       ${rec.multiplier}x ${rec.rewardType}`);
-    lines.push("");
-  }
 
   // Group by card
   const groups = {};
   for (const rec of data.recommendations) {
     if (!groups[rec.cardName]) {
-      groups[rec.cardName] = { rewardType: rec.rewardType, categories: [] };
+      groups[rec.cardName] = [];
     }
-    groups[rec.cardName].categories.push(rec);
+    groups[rec.cardName].push(rec);
   }
 
   const sortedGroups = Object.entries(groups).sort(
-    (a, b) => b[1].categories.length - a[1].categories.length
+    (a, b) => b[1].length - a[1].length
   );
 
-  lines.push(dash);
-  lines.push(center("FULL BREAKDOWN", w));
-  lines.push(dash);
-
-  for (const [cardName, group] of sortedGroups) {
-    lines.push("");
-    lines.push(`  [ ${cardName.toUpperCase()} ]`);
-    lines.push(`    ${group.rewardType}`);
-    lines.push("");
-    group.categories.sort((a, b) => b.multiplier - a.multiplier);
-    for (const rec of group.categories) {
-      const code = getCategoryCode(rec.category);
-      const rate = `${rec.multiplier}x`;
-      lines.push(`    ${code} ${rec.category.padEnd(24)} ${rate}`);
+  for (const [cardName, cats] of sortedGroups) {
+    cats.sort((a, b) => b.multiplier - a.multiplier);
+    lines.push(cardName);
+    for (const rec of cats) {
+      lines.push(`• ${rec.category} — ${rec.multiplier}x`);
     }
+    lines.push("");
   }
 
   if (data.fallbackCard) {
+    lines.push(`Everything else — ${data.fallbackCard.cardName} (${data.fallbackCard.baseRate}x)`);
     lines.push("");
-    lines.push(dash);
-    lines.push(center("EVERYTHING ELSE", w));
-    lines.push(dash);
-    lines.push(`  USE: ${data.fallbackCard.cardName}`);
-    lines.push(`  ${data.fallbackCard.baseRate}x ${data.fallbackCard.rewardType} on all other purchases`);
   }
 
-  lines.push("");
-  lines.push(line);
-  lines.push(center("watcard.app", w));
-  lines.push(line);
-
-  return lines.join("\n");
-}
-
-function center(text, width) {
-  const pad = Math.max(0, Math.floor((width - text.length) / 2));
-  return " ".repeat(pad) + text;
+  return lines.join("\n").trim();
 }
 
 function exportReport() {
