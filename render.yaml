@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: card-optimizer
+    name: wat-card
     runtime: node
     buildCommand: npm install && npm run build
     startCommand: npm start

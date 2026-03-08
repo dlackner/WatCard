@@ -1,6 +1,6 @@
-# Card Optimizer
+# Wat Card
 
-A simple web app that tells you which credit card to use for every spending category. Add the cards in your wallet and get a personalized optimization report — no card numbers needed, just the card name.
+A retro-styled web app that tells you which credit card to use for every spending category. Add the cards in your wallet and get a personalized optimization report — no card numbers needed, just the card name.
 
 ## How It Works
 
@@ -31,7 +31,7 @@ npm run build
 npm start
 ```
 
-The app runs at `http://localhost:3000` by default. Set the `PORT` environment variable to change it.
+The app runs at `http://localhost:3001` by default. Set the `PORT` environment variable to change it.
 
 ## Project Structure
 

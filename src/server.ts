@@ -4,7 +4,7 @@ import { findCards, getCardNames } from "./database";
 import { optimize } from "./optimizer";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
@@ -54,5 +54,5 @@ app.get("*", (_req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Card Optimizer running at http://localhost:${PORT}`);
+  console.log(`Wat Card running at http://localhost:${PORT}`);
 });

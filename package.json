@@ -1,7 +1,7 @@
 {
-  "name": "card-optimizer",
+  "name": "wat-card",
   "version": "1.0.0",
-  "description": "Find the best credit card to use for every spending category",
+  "description": "Wat Card - Find the best credit card to use for every purchase",
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
