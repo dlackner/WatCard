@@ -305,6 +305,7 @@ function getCategoryIcon(category) {
     "Online Shopping": "🛍️",
     "Amazon": "📦",
     "Drug Stores": "💊",
+    "Concerts & Events": "🎶",
     "Home Improvement": "🏠",
     "Entertainment": "🎬",
     "EV Charging": "🔌",
