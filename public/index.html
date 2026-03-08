@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Card Optimizer</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Card Optimizer</h1>
+      <p class="subtitle">Find the best card to use for every purchase</p>
+    </header>
+
+    <main>
+      <!-- Card input section -->
+      <section class="input-section">
+        <label for="card-input">Add your credit cards</label>
+        <div class="input-row">
+          <div class="autocomplete-wrapper">
+            <input
+              type="text"
+              id="card-input"
+              placeholder="e.g. Chase Sapphire, Amex Gold..."
+              autocomplete="off"
+            />
+            <ul id="suggestions" class="suggestions"></ul>
+          </div>
+          <button id="add-btn" class="btn btn-secondary">Add</button>
+        </div>
+
+        <div id="card-tags" class="card-tags"></div>
+
+        <button id="optimize-btn" class="btn btn-primary" disabled>
+          Optimize My Wallet
+        </button>
+      </section>
+
+      <!-- Results section -->
+      <section id="results" class="results hidden">
+        <h2>Your Optimized Wallet</h2>
+        <p class="results-subtitle" id="results-subtitle"></p>
+
+        <!-- Top pick summary -->
+        <div id="top-picks" class="top-picks"></div>
+
+        <!-- Grouped by card -->
+        <div id="card-groups" class="card-groups"></div>
+
+        <!-- Fallback card -->
+        <div id="fallback" class="fallback-card hidden"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>We never ask for card numbers &mdash; just the card name.</p>
+    </footer>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

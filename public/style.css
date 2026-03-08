@@ -1,0 +1,418 @@
+/* ── Reset & Base ──────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --border: #e5e7eb;
+  --tag-bg: #eef2ff;
+  --tag-text: #4f46e5;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Layout ───────────────────────────────────────────── */
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ── Input Section ────────────────────────────────────── */
+.input-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+}
+
+.input-section label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.autocomplete-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+#card-input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.15s;
+}
+
+#card-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+/* ── Autocomplete Suggestions ─────────────────────────── */
+.suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  list-style: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  display: none;
+}
+
+.suggestions.open {
+  display: block;
+}
+
+.suggestions li {
+  padding: 0.5rem 0.875rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.suggestions li:hover,
+.suggestions li.active {
+  background: var(--tag-bg);
+  color: var(--accent);
+}
+
+/* ── Card Tags ────────────────────────────────────────── */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.card-tag button {
+  background: none;
+  border: none;
+  color: var(--tag-text);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0;
+  opacity: 0.6;
+}
+
+.card-tag button:hover {
+  opacity: 1;
+}
+
+/* ── Buttons ──────────────────────────────────────────── */
+.btn {
+  padding: 0.625rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.btn-secondary {
+  background: var(--tag-bg);
+  color: var(--accent);
+}
+
+.btn-secondary:hover {
+  background: #dde3fc;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  width: 100%;
+  margin-top: 1.25rem;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Results ──────────────────────────────────────────── */
+.results {
+  margin-top: 2rem;
+}
+
+.results h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.results-subtitle {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Top Picks (hero summary) ────────────────────────── */
+.top-picks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.top-pick {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.top-pick::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--card-color, var(--accent));
+}
+
+.top-pick .top-pick-rate {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--card-color, var(--accent));
+  line-height: 1;
+}
+
+.top-pick .top-pick-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.top-pick .top-pick-category {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-top: 0.65rem;
+}
+
+.top-pick .top-pick-card {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* ── Card Groups ─────────────────────────────────────── */
+.card-groups {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.card-group {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.card-group-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--card-color, var(--accent)) 0%, var(--card-color-end, var(--accent-hover)) 100%);
+  color: #fff;
+}
+
+.card-group-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  backdrop-filter: blur(4px);
+}
+
+.card-group-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.card-group-reward-type {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.card-group-count {
+  margin-left: auto;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+.card-group-body {
+  padding: 0;
+}
+
+.category-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s;
+}
+
+.category-row:last-child {
+  border-bottom: none;
+}
+
+.category-row:hover {
+  background: #fafbfc;
+}
+
+.category-row .category-name {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.category-row .category-rate {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--card-color, var(--accent));
+  background: color-mix(in srgb, var(--card-color, var(--accent)) 10%, transparent);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ── Fallback Card ───────────────────────────────────── */
+.fallback-card {
+  margin-top: 1.25rem;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.fallback-card .fallback-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.fallback-card .fallback-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.fallback-card .fallback-rate {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0.15rem;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 480px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+}
