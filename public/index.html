@@ -6,14 +6,25 @@
   <title>Wat Card</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <div class="container">
+  <!-- Welcome / Login page -->
+  <div id="welcome" class="welcome-page">
+    <h1>Wat Card</h1>
+    <form id="name-form">
+      <input type="text" id="name-input" placeholder="Your name" autofocus />
+      <button type="submit">Go</button>
+    </form>
+    <button class="secondary skip-btn" id="skip-btn">Skip &mdash; use without saving</button>
+  </div>
+
+  <!-- Main app (hidden until login/skip) -->
+  <div id="app" class="container hidden">
     <header>
       <h1>Wat Card</h1>
-      <p class="subtitle">Find the best card to use for every purchase</p>
+      <p class="subtitle" id="greeting">Find the best card to use for every purchase</p>
     </header>
 
     <main>
@@ -67,7 +78,7 @@
     </main>
 
     <footer></footer>
-  </div>
+  </div><!-- end #app -->
 
   <script src="/app.js"></script>
 </body>

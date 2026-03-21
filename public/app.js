@@ -1,3 +1,30 @@
+// ── Welcome Screen ───────────────────────────────────────
+const welcomeEl = document.getElementById("welcome");
+const appEl = document.getElementById("app");
+const nameForm = document.getElementById("name-form");
+const nameInput = document.getElementById("name-input");
+const skipBtn = document.getElementById("skip-btn");
+const greetingEl = document.getElementById("greeting");
+
+let userName = "";
+
+function enterApp(name) {
+  userName = name;
+  welcomeEl.classList.add("hidden");
+  appEl.classList.remove("hidden");
+  if (name) {
+    greetingEl.textContent = `Welcome, ${name}. Find the best card for every purchase.`;
+  }
+}
+
+nameForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const name = nameInput.value.trim();
+  if (name) enterApp(name);
+});
+
+skipBtn.addEventListener("click", () => enterApp(""));
+
 // ── State ────────────────────────────────────────────────
 const selectedCards = [];
 let allCardNames = [];
@@ -31,7 +58,26 @@ const CARD_THEMES = {
   "US Bank Cash+":            { gradient: "linear-gradient(135deg, #002868 0%, #003D99 50%, #002868 100%)", icon: "US", network: "VISA", textColor: "#fff" },
   "Bank of America Customized Cash": { gradient: "linear-gradient(135deg, #012169 0%, #1A3F8F 50%, #012169 100%)", icon: "BA", network: "VISA", textColor: "#E31837" },
   "Bank of America Premium Rewards": { gradient: "linear-gradient(135deg, #4A4A5A 0%, #6A6A7A 40%, #4A4A5A 100%)", icon: "BA", network: "VISA", textColor: "#fff" },
+  "Delta SkyMiles Gold":      { gradient: "linear-gradient(135deg, #A67C28 0%, #C49A3C 50%, #8B6914 100%)", icon: "DL", network: "AMEX", textColor: "#fff" },
+  "Delta SkyMiles Platinum":  { gradient: "linear-gradient(135deg, #6B6B7B 0%, #8E8E9E 40%, #5A5A6A 100%)", icon: "DL", network: "AMEX", textColor: "#fff" },
+  "Delta SkyMiles Reserve":   { gradient: "linear-gradient(135deg, #2C1654 0%, #3D1F73 50%, #1E0E3A 100%)", icon: "DL", network: "AMEX", textColor: "#C9A961" },
+  "United Explorer":          { gradient: "linear-gradient(135deg, #002244 0%, #003366 50%, #001A33 100%)", icon: "UA", network: "VISA", textColor: "#fff" },
+  "United Quest":             { gradient: "linear-gradient(135deg, #1A1A2E 0%, #003366 50%, #001A33 100%)", icon: "UA", network: "VISA", textColor: "#C9A961" },
+  "United Club Infinite":     { gradient: "linear-gradient(135deg, #0A0A14 0%, #1A1A2E 40%, #0A0A14 100%)", icon: "UA", network: "VISA", textColor: "#8CA8C8" },
+  "Southwest Rapid Rewards Plus": { gradient: "linear-gradient(135deg, #304CB2 0%, #1A2E8A 100%)", icon: "WN", network: "VISA", textColor: "#FFBF27" },
+  "Southwest Rapid Rewards Priority": { gradient: "linear-gradient(135deg, #1A2E8A 0%, #0A1A5C 100%)", icon: "WN", network: "VISA", textColor: "#FFBF27" },
+  "AAdvantage Aviator Red":   { gradient: "linear-gradient(135deg, #B31B34 0%, #D42040 50%, #8C1528 100%)", icon: "AA", network: "MC", textColor: "#fff" },
+  "Citi AAdvantage Platinum Select": { gradient: "linear-gradient(135deg, #B31B34 0%, #003B70 100%)", icon: "AA", network: "MC", textColor: "#fff" },
+  "Citi AAdvantage Executive": { gradient: "linear-gradient(135deg, #1A1A2E 0%, #2E2E48 50%, #1A1A2E 100%)", icon: "AA", network: "MC", textColor: "#B31B34" },
+  "Alaska Airlines Visa":     { gradient: "linear-gradient(135deg, #00274C 0%, #004680 50%, #00274C 100%)", icon: "AS", network: "VISA", textColor: "#01B04A" },
+  "Hawaiian Airlines World Elite": { gradient: "linear-gradient(135deg, #4B0082 0%, #6B238E 50%, #3A006B 100%)", icon: "HA", network: "MC", textColor: "#fff" },
+  "Frontier Airlines World Mastercard": { gradient: "linear-gradient(135deg, #004225 0%, #006838 50%, #003018 100%)", icon: "F9", network: "MC", textColor: "#fff" },
   "JetBlue Plus":             { gradient: "linear-gradient(135deg, #003876 0%, #005EB8 50%, #003876 100%)", icon: "JB", network: "MC", textColor: "#fff" },
+  "Marriott Bonvoy Boundless": { gradient: "linear-gradient(135deg, #6B2D5B 0%, #8B3D7B 50%, #5A2050 100%)", icon: "MB", network: "VISA", textColor: "#fff" },
+  "Hilton Honors American Express": { gradient: "linear-gradient(135deg, #003876 0%, #005DA6 50%, #002854 100%)", icon: "HH", network: "AMEX", textColor: "#fff" },
+  "Hilton Honors Surpass":    { gradient: "linear-gradient(135deg, #C49A3C 0%, #A67C28 50%, #8B6914 100%)", icon: "HH", network: "AMEX", textColor: "#fff" },
+  "IHG One Rewards Premier":  { gradient: "linear-gradient(135deg, #003D2E 0%, #005C45 50%, #002E22 100%)", icon: "IH", network: "MC", textColor: "#fff" },
+  "World of Hyatt":           { gradient: "linear-gradient(135deg, #1A1A2E 0%, #2D2D44 50%, #1A1A2E 100%)", icon: "HY", network: "VISA", textColor: "#fff" },
   "Apple Card":               { gradient: "linear-gradient(135deg, #E8E8ED 0%, #F5F5F7 40%, #D2D2D7 100%)", icon: "", network: "MC", textColor: "#1D1D1F" },
   "Amazon Prime Visa":        { gradient: "linear-gradient(135deg, #131921 0%, #232F3E 40%, #131921 100%)", icon: "AZ", network: "VISA", textColor: "#FF9900" },
   "Costco Anywhere Visa":     { gradient: "linear-gradient(135deg, #E31837 0%, #005DAA 100%)", icon: "CO", network: "VISA", textColor: "#fff" },
@@ -60,7 +106,18 @@ function getTheme(cardName) {
   if (cardName.includes("Apple")) return { color: "#333", colorEnd: "#111", icon: "AP" };
   if (cardName.includes("Amazon")) return { color: "#FF9900", colorEnd: "#CC7A00", icon: "AZ" };
   if (cardName.includes("Costco")) return { color: "#E31837", colorEnd: "#B31229", icon: "CO" };
+  if (cardName.includes("Delta")) return { color: "#003366", colorEnd: "#001A33", icon: "DL" };
+  if (cardName.includes("United")) return { color: "#002244", colorEnd: "#001A33", icon: "UA" };
+  if (cardName.includes("Southwest")) return { color: "#304CB2", colorEnd: "#1A2E8A", icon: "WN" };
+  if (cardName.includes("AAdvantage") || cardName.includes("Aviator")) return { color: "#B31B34", colorEnd: "#8C1528", icon: "AA" };
+  if (cardName.includes("Alaska")) return { color: "#00274C", colorEnd: "#001A33", icon: "AS" };
+  if (cardName.includes("Hawaiian")) return { color: "#4B0082", colorEnd: "#3A006B", icon: "HA" };
+  if (cardName.includes("Frontier")) return { color: "#004225", colorEnd: "#003018", icon: "F9" };
   if (cardName.includes("JetBlue")) return { color: "#003876", colorEnd: "#002550", icon: "JB" };
+  if (cardName.includes("Marriott")) return { color: "#6B2D5B", colorEnd: "#5A2050", icon: "MB" };
+  if (cardName.includes("Hilton")) return { color: "#003876", colorEnd: "#002854", icon: "HH" };
+  if (cardName.includes("IHG")) return { color: "#003D2E", colorEnd: "#002E22", icon: "IH" };
+  if (cardName.includes("Hyatt")) return { color: "#1A1A2E", colorEnd: "#0A0A14", icon: "HY" };
   return { color: "#4f46e5", colorEnd: "#4338ca", icon: "CC" };
 }
 
@@ -314,6 +371,24 @@ function getCategoryIcon(category) {
     "Costco": "🏪",
     "JetBlue Purchases": "✈️",
     "Wholesale Clubs": "🏪",
+    "Delta": "✈️",
+    "United": "✈️",
+    "Southwest": "✈️",
+    "American Airlines": "✈️",
+    "Alaska Airlines": "✈️",
+    "Hawaiian Airlines": "✈️",
+    "Frontier Airlines": "✈️",
+    "Marriott": "🏨",
+    "Hilton": "🏨",
+    "IHG": "🏨",
+    "Hyatt": "🏨",
+    "Gym": "🏋️",
+    "Fitness": "🏋️",
+    "Shipping": "📦",
+    "Internet": "🌐",
+    "Phone": "📱",
+    "Utilities": "💡",
+    "Advertising": "📢",
     "Rotating Quarterly Category": "🔄",
     "Top Eligible Category": "⭐",
     "Your Choice Category 1": "⭐",
