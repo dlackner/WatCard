@@ -1,3 +1,31 @@
+// ── Theme Toggle ─────────────────────────────────────────
+function getInitialTheme() {
+  const saved = localStorage.getItem("watcard-theme");
+  if (saved === "dark" || saved === "light") return saved;
+  return "light";
+}
+
+let currentTheme = getInitialTheme();
+document.documentElement.setAttribute("data-theme", currentTheme);
+
+function updateToggleButtons() {
+  const label = currentTheme === "light" ? "Dark" : "Light";
+  document.querySelectorAll(".theme-toggle-btn").forEach((btn) => {
+    btn.textContent = label;
+  });
+}
+
+function toggleTheme() {
+  currentTheme = currentTheme === "light" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", currentTheme);
+  localStorage.setItem("watcard-theme", currentTheme);
+  updateToggleButtons();
+}
+
+document.getElementById("theme-toggle-welcome").addEventListener("click", toggleTheme);
+document.getElementById("theme-toggle-app").addEventListener("click", toggleTheme);
+updateToggleButtons();
+
 // ── Welcome Screen ───────────────────────────────────────
 const welcomeEl = document.getElementById("welcome");
 const appEl = document.getElementById("app");
