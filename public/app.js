@@ -362,7 +362,7 @@ function getCategoryIcon(category) {
     "Transit": "🚇",
     "Online Shopping": "🛍️",
     "Amazon": "📦",
-    "Drug Stores": "💊",
+    "Drugstores": "✚",
     "Concerts & Events": "🎶",
     "Home Improvement": "🏠",
     "Entertainment": "🎬",
