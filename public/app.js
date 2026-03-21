@@ -12,6 +12,7 @@ function enterApp(name) {
   userName = name;
   welcomeEl.classList.add("hidden");
   appEl.classList.remove("hidden");
+  window.scrollTo(0, 0);
   if (name) {
     greetingEl.textContent = `Welcome, ${name}. Find the best card for every purchase.`;
   }
